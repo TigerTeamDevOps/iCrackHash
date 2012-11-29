@@ -34,6 +34,7 @@ class Encrypt(object):
                       ('mysqlChar', self.mysqlChar),
                       ('mssqlChar', self.mssqlChar),
                       ('fullUrl', self.fullUrl),
+                      ('binary', self.binary),
                       ])
 
     def md5(self, plain):
@@ -78,9 +79,6 @@ class Encrypt(object):
     def u00(self, plain):
         return ''.join(['{0}'.format(hex(ord(i)).replace('0x', '%u00')) for i in plain])
 
-    def binary(self, plain):
-        return ''.join(['%08d' % int(bin(ord(i))[2:]) for i in plain])
-
     def mysqlChar(self, plain):
         return 'CHAR({0})'.format(''.join(['{0}, '.format((str(ord(i)))) for i in plain]).rstrip(', '))
 
@@ -89,5 +87,8 @@ class Encrypt(object):
 
     def fullUrl(self, plain):
         return ''.join(['%s' % hex(ord(i)).replace('0x', '%') for i in plain])
+
+    def binary(self, plain):
+        return ''.join(['%08d' % int(bin(ord(i))[2:]) for i in plain])
 
 encrypt = Encrypt()

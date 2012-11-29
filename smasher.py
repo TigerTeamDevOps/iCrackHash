@@ -33,9 +33,7 @@ def hashType(hash):
         return 'fullUrl'
 
     elif hash.startswith('0b1') \
-    or hash.startswith('01') \
-    and hash.isalnum() \
-    and hash.isdigit():
+    or hash.startswith('01') and hash.isalnum() and hash.isdigit() and all((c in ['0', '1']) for c in hash):
         return 'binary'
 
     # the following block is customized to fit icrackhas's JS output >>>   &#x61;  will be :w00t:x61:deli:
